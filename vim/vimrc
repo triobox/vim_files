@@ -9,6 +9,7 @@ syntax on
 filetype on
 filetype plugin indent on
 
+
 " Make vim incompatbile to vi.
 set nocompatible
 set modelines=0
@@ -226,6 +227,7 @@ let g:solarized_termcolors=256
 colorscheme solarized
 call togglebg#map("<F2>")
 
+
 " Special Settings for Consoles
 "if !has("gui_running")
 "    set t_Co=256
@@ -264,6 +266,11 @@ nmap <leader>f <Esc>:NERDTreeToggle<CR>
 
 
 " Mini Buffer some settigns
+
+
+" command-t settings
+let g:CommandTMaxFiles=20000
+:set wildignore+=*.o,*.obj,.git
 
 " Scratch settings
 nmap <A-s> :Scratch<CR>
