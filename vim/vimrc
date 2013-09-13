@@ -3,8 +3,10 @@
 " Pathogen settings.
 filetype off
 call pathogen#runtime_append_all_bundles()
-call pathogen#infect()
-Helptags
+call pathogen#helptags()
+
+syntax on
+filetype on
 filetype plugin indent on
 
 " Make vim incompatbile to vi.
@@ -18,8 +20,13 @@ set softtabstop=4
 set expandtab
 
 " More Common Settings.
+set autoread
+set history=500
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5
+set guifont=Monaco\ 10
+set guifontwide=WenQuanYi\ Zen\ Hei\ 10
+
 set scrolloff=3
 "set autoindent
 set showmode
@@ -28,7 +35,6 @@ set hidden
 set wildmenu
 set wildmode=list:longest
 "set visualbell
-syntax enable
 
 "set cursorline
 set ttyfast
@@ -38,11 +44,8 @@ set laststatus=2
 set stl=%f\ %m\ %r\ Line:%l/%L[%p%%]\ Col:%c\ Buf:%n\ %=[%{&ff}]\[%b][0x%B]
 set cmdheight=2
 set relativenumber
+"set number
 "set numberwidth=3
-
-"set relativenumber
-set number
-set norelativenumber
 
 "set undofile
 "set shell=/bin/bash
@@ -51,6 +54,7 @@ set matchtime=3
 
 " use mouse everywhere
 set mouse=a 
+set whichwrap+=<,>,h,l  " backhspace and cursor keys wrap to
 " shortens messages to avoid 'press a key' prompt
 set shortmess=atI
 " don't make noise
@@ -110,6 +114,14 @@ nnoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 
+
+" Naviagations windows using keys Ctrl+hjkl
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
+
+
 "back to previously editing file
 nmap <A-e> :e#<CR>
 "bavk to previsouly viewing file
@@ -117,6 +129,9 @@ nmap <A-e> :e#<CR>
 " cycling among all opened buffers
 nmap <A-n> : bnext<CR>
 nmap <A-p> : bprev<CR>
+"to move between the tabs with ALT+LeftArrow and ALT+RightArrow
+map <silent><tab-right> :tabnext<CR>
+map <silent><tab-left> :tabprevious<CR>
 
 
 " Get Rid of stupid Goddamned help keys
@@ -145,7 +160,9 @@ nnoremap <leader>q gqip
 nnoremap <leader>v V`]
 
 " ,ev Shortcut to edit .vimrc file on the fly on a vertical window.
-nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
+nnoremap <leader>ev <C-w><C-s><C-l>:e $MYVIMRC<cr>
+map <F7> :e $MYVIMRC<CR>
+map <F6> :so $MYVIMRC<CR>
 
 " jj For Qicker Escaping between normal and editing mode.
 "inoremap jj <ESC>
@@ -196,14 +213,15 @@ if has("gui_running")
     set guioptions+=a
     set guioptions-=m
     "colo badwolf
-    set background=dark
-    "set background=light
     set listchars=tab:▸\ ,eol:¬         " Invisibles using the Textmate style
 else
     set t_Co=256
     "colorschem badwolf
-    set background=dark
 endif
+
+syntax enable
+set background=dark
+"set background=light
 let g:solarized_termcolors=256
 colorscheme solarized
 call togglebg#map("<F2>")
@@ -242,35 +260,32 @@ let NERDTreeChDirMode=2
 let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$', '\.swp$']
 let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\~$']
 let NERDTreeShowBookmarks=1
-nmap <leader>f <Esc>:NERDTreeToggle<cr>
+nmap <leader>f <Esc>:NERDTreeToggle<CR>
 
 
-" Mini Buffer some settigns."
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1
+" Mini Buffer some settigns
+
+" Scratch settings
+nmap <A-s> :Scratch<CR>
+
+" VIM-Jedi settings
+" let g:jedi#completions_enabled = 0
+let g:jedi#use_tabs_not_buffers = 0
 
 " Tab color settings to make it more visible.
 hi MBEChanged ctermfg=white
 hi MBENormal ctermfg=white
 
-" Rope Plugin settings
-imap <leader>j <ESC>:RopeGotoDefinition<cr>
-nmap <leader>j <ESC>:RopeGotoDefinition<cr>
-
-" Tagbar key bindings."
+" Tagbar key bindings.
 nmap <leader>l <ESC>:TagbarToggle<cr>
 imap <leader>l <ESC>:TagbarToggle<cr>i
 
-" Gundo key bindings."
-map <leader>g :GundoToggle<CR>
+" Gundo key bindings.
+nnoremap <leader>g :GundoToggle<CR>
 
-" Snipmate remap settings. It's binding overwritten standard
-" bindings.
-" Snipmate using bellow VIM's default keys, just unmap it.
-" autocmd VimEnter * unmap! <C-i>
 
+" pep8 key bindings.
+let g:pep8_map='<leader>8'
 
 " =========== END Plugin Settings =========="
 "
