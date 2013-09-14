@@ -220,12 +220,6 @@ else
     "colorschem badwolf
 endif
 
-syntax enable
-set background=dark
-"set background=light
-let g:solarized_termcolors=256
-colorscheme solarized
-call togglebg#map("<F2>")
 
 
 " Special Settings for Consoles
@@ -264,9 +258,40 @@ let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\~$']
 let NERDTreeShowBookmarks=1
 nmap <leader>f <Esc>:NERDTreeToggle<CR>
 
+" Solarized colorscheme setting
+syntax enable
+set background=dark
+"set background=light
+if has("gui_running")
+    let g:solarized_termcolors=256
+endif
+colorscheme solarized
+let g:solarized_termcolors= 256 
+let g:solarized_termtrans = 1 
+let g:solarized_degrade =  1 
+let g:solarized_bold = 1  
+let g:solarized_underline = 1  
+let g:solarized_italic = 1  
+"let g:solarized_contrast = "normal"| "high" or "low" 
+"let g:solarized_visibility= "normal"| "high" or "low" 
+call togglebg#map("<F2>")
+
+
+" Conque_term some settigns
+let g:ConqueTerm_Color = 0
+let g:ConqueTerm_SessionSupport = 1
+let g:ConqueTerm_InsertOnEnter = 1
+let g:ConqueTerm_CloseOnEnd = 1
+let g:ConqueTerm_ToggleKey = '<F8>'
+let g:ConqueTerm_SendVisKey = '<F9>'
+let g:ConqueTerm_SendFileKey = '<F10>'
+let g:ConqueTerm_ExecFileKey = '<F11>'
+"let g:ConqueTerm_TERM = 'vt100'
+let g:ConqueTerm_TERM = 'xterm'
+nnoremap <A-i> :call conque_term#open('ipython2', ['split'], 1)<CR>
 
 " Mini Buffer some settigns
-
+" use <A-n> & <A-p> to cycle among buffers
 
 " command-t settings
 let g:CommandTMaxFiles=20000
