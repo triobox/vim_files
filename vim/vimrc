@@ -3,7 +3,9 @@
 " Pathogen settings.
 filetype off
 call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+call pathogen#infect()
+"call pathogen#helptags()
+"call helptags
 
 syntax on
 filetype on
@@ -309,12 +311,11 @@ hi MBEChanged ctermfg=white
 hi MBENormal ctermfg=white
 
 " Tagbar key bindings.
-nmap <leader>l <ESC>:TagbarToggle<cr>
-imap <leader>l <ESC>:TagbarToggle<cr>i
+nmap <leader>l <ESC> :TagbarToggle<CR>
+imap <leader>l <ESC> :TagbarToggle<CR>i
 
 " Gundo key bindings.
 nnoremap <leader>g :GundoToggle<CR>
-
 
 " pep8 key bindings.
 let g:pep8_map='<leader>8'
