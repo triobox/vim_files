@@ -38,6 +38,13 @@ set hidden
 set wildmenu
 set wildmode=list:longest
 "set visualbell
+set ignorecase
+set smartcase
+set gdefault
+set incsearch
+set showmatch
+set hlsearch
+nnoremap <leader><space> :noh<cr>
 
 "set cursorline
 set ttyfast
@@ -63,9 +70,6 @@ set shortmess=atI
 " don't make noise
 set noerrorbells
 
-"Changing Leader Key
-"let mapleader = ","
-""""
 " Set title to window
 set title 
 " Dictionary path, from which the words are being looked up.
@@ -77,32 +81,33 @@ set pastetoggle=<F3>
 " Make Vim able to edit corntab fiels again.
 set backupskip=/tmp/*,/private/tmp/*"
 
-" Enable Mouse
-set mouse=a
 
 "Settings for Searching and Moving
 nnoremap / /\v
 vnoremap / /\v
-set ignorecase
-set smartcase
-set gdefault
-set incsearch
-set showmatch
-set hlsearch
-nnoremap <leader><space> :noh<cr>
 "nnoremap <tab> %
 "vnoremap <tab> %
 
 
 " Make Vim to handle long lines nicely.
 set wrap
-set textwidth=79
+set textwidth=78
 set formatoptions=tcqrn
-set colorcolumn=79
+set colorcolumn=78
 
 " To  show special characters in Vim
 "set list
 set listchars=tab:▸\ ,eol:¬
+
+
+"""" Mapping and shortcut
+
+"Changing Leader Key
+let mapleader = ","
+""""
+
+" jk For Qicker Escaping between normal and editing mode.
+inoremap jK <ESC>
 
 " Naviagations using keys up/down/left/right
 " Disabling default keys to learn the hjkl
@@ -117,14 +122,20 @@ nnoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 
+" Get Rid of stupid Goddamned help keys
+inoremap <F1> <ESC>
+nnoremap <F1> <ESC>
+vnoremap <F1> <ESC>
+
+" Map : to ; also in command mode.
+"nnoremap ; :
+
 
 " Naviagations windows using keys Ctrl+hjkl
 map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
-
-
 "back to previously editing file
 nmap <A-e> :e#<CR>
 "bavk to previsouly viewing file
@@ -137,38 +148,25 @@ map <silent><tab-right> :tabnext<CR>
 map <silent><tab-left> :tabprevious<CR>
 
 
-" Get Rid of stupid Goddamned help keys
-inoremap <F1> <ESC>
-nnoremap <F1> <ESC>
-vnoremap <F1> <ESC>
-
-" Map : to ; also in command mode.
-"nnoremap ; :
 
 " Set vim to save the file on focus out.
-au FocusLost * :wa
+"au FocusLost * :wa
 
-" Adding More Shorcuts keys using leader kye.
-" Leader Kye provide separate namespace for specific commands.
+" Leader key shortcuts.
+" Leader Key provide separate namespace for specific commands.
+
 ",W Command to remove white space from a file.
-""nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
-
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 " ,ft Fold tag, helpful for HTML editing.
 nnoremap <leader>ft vatzf
-
 " ,q Re-hardwrap Paragraph
 nnoremap <leader>q gqip
-
 " ,v Select just pasted text.
 nnoremap <leader>v V`]
-
 " ,ev Shortcut to edit .vimrc file on the fly on a vertical window.
 nnoremap <leader>ev <C-w><C-s><C-l>:e $MYVIMRC<cr>
 map <F7> :e $MYVIMRC<CR>
 map <F6> :so $MYVIMRC<CR>
-
-" jj For Qicker Escaping between normal and editing mode.
-"inoremap jj <ESC>
 
 
 " Working with split screen nicely
@@ -290,7 +288,8 @@ let g:ConqueTerm_SendFileKey = '<F10>'
 let g:ConqueTerm_ExecFileKey = '<F11>'
 "let g:ConqueTerm_TERM = 'vt100'
 let g:ConqueTerm_TERM = 'xterm'
-nnoremap <A-i> :call conque_term#open('ipython2', ['split'], 1)<CR>
+"nnoremap <A-i> :call conque_term#open('ipython2', ['split'], 1)<CR>
+nnoremap <leader>i <Esc>:call conque_term#open('ipython2', ['split'], 1)<CR>
 
 " Mini Buffer some settigns
 " use <A-n> & <A-p> to cycle among buffers
@@ -300,7 +299,8 @@ let g:CommandTMaxFiles=20000
 :set wildignore+=*.o,*.obj,.git
 
 " Scratch settings
-nmap <A-s> :Scratch<CR>
+"nmap <A-s> :Scratch<CR>
+nmap <leader>s <Esc>:Scratch<CR>
 
 " VIM-Jedi settings
 " let g:jedi#completions_enabled = 0
@@ -313,10 +313,10 @@ hi MBENormal ctermfg=white
 " Tagbar key bindings.
 let g:tagbar_left = 0
 nmap <silent><leader>l <ESC> :TagbarToggle<CR>
-imap <leader>l <ESC> :TagbarToggle<CR>i
+imap <leader>l <ESC> :TagbarToggle<CR>
 
 " Gundo key bindings.
-nnoremap <leader>g :GundoToggle<CR>
+nnoremap <leader>u <ESC> :GundoToggle<CR>
 
 " pep8 key bindings.
 let g:pep8_map='<leader>8'
